@@ -1,0 +1,138 @@
+{
+  "folders": [
+    {
+      "name": "MEAS-D-25-13753 Reproduction",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "${workspaceFolder}/venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.extraPaths": ["${workspaceFolder}"],
+    "editor.formatOnSave": true,
+    "editor.rulers": [100],
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+      "**/.pytest_cache": true
+    },
+    "terminal.integrated.env.windows": {
+      "PYTHONPATH": "${workspaceFolder}",
+      "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:256"
+    }
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Smoke-test (no datasets)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/pipeline_rtx4060.py",
+        "args": ["--ablation"],
+        "console": "integratedTerminal",
+        "env": {
+          "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:256"
+        }
+      },
+      {
+        "name": "Run MOT17 — full eval + ablation",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/pipeline_rtx4060.py",
+        "args": [
+          "--data_root", "${workspaceFolder}/data",
+          "--dataset",   "MOT17",
+          "--eval",      "full",
+          "--ablation",
+          "--num_seeds", "5",
+          "--device",    "cuda",
+          "--output",    "${workspaceFolder}/results/mot17"
+        ],
+        "console": "integratedTerminal",
+        "env": {
+          "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:256"
+        }
+      },
+      {
+        "name": "Run MOT16",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/pipeline_rtx4060.py",
+        "args": [
+          "--data_root", "${workspaceFolder}/data",
+          "--dataset",   "MOT16",
+          "--eval",      "full",
+          "--ablation",
+          "--device",    "cuda",
+          "--output",    "${workspaceFolder}/results/mot16"
+        ],
+        "console": "integratedTerminal",
+        "env": {
+          "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:256"
+        }
+      },
+      {
+        "name": "Run MOT20",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/pipeline_rtx4060.py",
+        "args": [
+          "--data_root", "${workspaceFolder}/data",
+          "--dataset",   "MOT20",
+          "--eval",      "full",
+          "--ablation",
+          "--device",    "cuda",
+          "--output",    "${workspaceFolder}/results/mot20"
+        ],
+        "console": "integratedTerminal",
+        "env": {
+          "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:256"
+        }
+      },
+      {
+        "name": "Run UA-DETRAC (vehicle benchmark)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/pipeline_rtx4060.py",
+        "args": [
+          "--data_root", "${workspaceFolder}/data",
+          "--dataset",   "UA-DETRAC",
+          "--eval",      "full",
+          "--device",    "cuda",
+          "--output",    "${workspaceFolder}/results/ua-detrac"
+        ],
+        "console": "integratedTerminal",
+        "env": {
+          "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:256"
+        }
+      },
+      {
+        "name": "Run KITTI (vehicle benchmark)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/pipeline_rtx4060.py",
+        "args": [
+          "--data_root", "${workspaceFolder}/data",
+          "--dataset",   "KITTI",
+          "--eval",      "full",
+          "--device",    "cuda",
+          "--output",    "${workspaceFolder}/results/kitti"
+        ],
+        "console": "integratedTerminal",
+        "env": {
+          "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:256"
+        }
+      },
+      {
+        "name": "CPU-only smoke-test",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/pipeline_rtx4060.py",
+        "args": ["--ablation", "--device", "cpu"],
+        "console": "integratedTerminal"
+      }
+    ]
+  }
+}
