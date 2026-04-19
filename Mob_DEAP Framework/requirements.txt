@@ -1,0 +1,37 @@
+# ============================================================
+# requirements.txt  —  MEAS-D-25-13753  Mob-DEAP Pipeline
+# Hardware target: Intel Core i7-14700K + NVIDIA RTX 4060 (8 GB)
+# ============================================================
+#
+# STEP 1 — Install PyTorch with CUDA 12.1 first (RTX 4060 needs CUDA 11.8+):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#
+# STEP 2 — Install remaining dependencies:
+#   pip install -r requirements.txt
+
+# ── Core deep learning ────────────────────────────────────────────────────
+timm>=0.9.0                  # pretrained backbones
+
+# ── Scientific computing ──────────────────────────────────────────────────
+numpy>=1.24.0
+scipy>=1.10.0                # Wilcoxon, Friedman tests
+scikit-learn>=1.2.0          # metrics, preprocessing
+pandas>=2.0.0                # results tables
+
+# ── Computer vision ───────────────────────────────────────────────────────
+opencv-python>=4.8.0         # HFCBF bilateral filter, frame I/O
+
+# ── MOT evaluation ────────────────────────────────────────────────────────
+motmetrics>=1.4.0            # MOTA, IDF1, MOTP
+
+# ── Tracking utilities ────────────────────────────────────────────────────
+filterpy>=1.4.5              # Kalman filter for SORT tracker
+lap>=0.4.0                   # Linear assignment (Hungarian algorithm)
+# If lap fails to compile on Windows, use:  pip install lapjv
+
+# ── Dataset parsing ───────────────────────────────────────────────────────
+lxml>=4.9.0                  # UA-DETRAC XML annotation parsing
+
+# ── Visualisation and logging ─────────────────────────────────────────────
+matplotlib>=3.7.0
+tqdm>=4.65.0

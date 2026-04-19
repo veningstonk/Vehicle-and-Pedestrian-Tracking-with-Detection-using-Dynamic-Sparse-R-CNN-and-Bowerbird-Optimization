@@ -1,0 +1,55 @@
+Project structure
+
+mob_deap_pipeline/
+│
+├── main.py                    ← single entry point, all run modes
+├── config.py                  ← all hyperparameters as dataclasses
+├── requirements.txt           ← pinned dependencies
+│
+├── models/
+│   ├── hfcbf.py               ← HFCBF preprocessing (§3.2)
+│   ├── attention.py           ← DA-EVA module, Eq. 8–9 (§3.4.2)
+│   └── mob_deap.py            ← MobDEAP classifier + DSR-CNN wrapper (§3.3–3.4)
+│
+├── optimizers/
+│   └── bowerbird.py           ← Bowerbird Optimizer + Adaptive EPO (§3.3, §3.4.3)
+│
+├── tracking/
+│   └── sort_tracker.py        ← Kalman filter SORT tracker (Stage 4)
+│
+├── data/
+│   ├── mot_dataset.py         ← MOT16 / MOT17 / MOT20 loader
+│   └── ua_detrac.py           ← UA-DETRAC (XML) + KITTI loaders
+│
+├── evaluation/
+│   ├── mot_metrics.py         ← MOTA, IDF1, HOTA computation
+│   └── ablation.py            ← C0–C5 independent ablation + statistics
+│
+├── training/
+│   └── trainer.py             ← Focal Loss, GIoU Loss, MobDEAPTrainer
+│
+└── utils/
+    ├── seed.py                ← global reproducibility seed
+    └── profiler.py            ← end-to-end latency profiler
+
+How to run
+
+# Install PyTorch first (RTX 4060 needs CUDA 12.1)
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+pip install -r requirements.txt
+
+# Smoke test — no datasets needed, ~30 seconds
+python main.py --mode smoke
+
+# Full evaluation on MOT17
+python main.py --mode eval --dataset MOT17 --split train --device cuda --output ./results
+
+# Ablation study (C0–C5, 5 seeds)
+python main.py --mode ablation --dataset MOT17 --num_seeds 5
+
+# Vehicle benchmarks
+python main.py --mode eval --dataset UA-DETRAC --split train
+python main.py --mode eval --dataset KITTI --split training
+
+# Everything at once
+python main.py --mode all --dataset all --device cuda
