@@ -1,13 +1,6 @@
 """
 experiments/fitness_functions.py
 
-The two optimisation targets compared in Section 3.5 / Table 16:
-
-  1. proposal_score_fitness  -- BO's 100-D target (manuscript Eq. 3)
-  2. hyperparameter_val_loss -- EPO's 3-D target (surrogate validation loss)
-
-Both functions are deterministic given a fixed random seed for the
-synthetic data, so results are exactly reproducible across machines.
 """
 from __future__ import annotations
 

@@ -1,10 +1,5 @@
 """
 optimizers/baseline_search.py
-
-Grid search and random search baselines used in Section 3.5
-("Comparison with standard hyperparameter tuning") to demonstrate
-why standard search strategies cannot replace BO and EPO under an
-identical function-evaluation budget (Reviewer #4, Comment 2).
 """
 from __future__ import annotations
 

@@ -1,24 +1,3 @@
-"""
-experiments/run_table16_comparison.py
-
-Reproduces Table 16 of the manuscript:
-"BO/EPO vs. grid search and random search, matched evaluation budget"
-(Section 3.5, response to Reviewer #4 Comment 2).
-
-Run from the repository root:
-
-    python -m experiments.run_table16_comparison
-
-or directly:
-
-    python experiments/run_table16_comparison.py
-
-Output:
-    Prints Table 16 to stdout.
-    Saves results/table16_results.json with full numeric detail.
-    Saves results/table16.csv as a flat table for direct inclusion
-    in spreadsheets or LaTeX table generators.
-"""
 from __future__ import annotations
 
 import json
@@ -60,7 +39,7 @@ def run_bo_block():
     """Section A: BO vs. random search on the 100-D proposal weighting task.
     Grid search is reported as infeasible (combinatorial blow-up)."""
     print("=" * 78)
-    print("SECTION A — BO target: 100-D proposal score weighting (Eq. 3)")
+    print("SECTION A — BO target: 100-D proposal score weighting")
     print("=" * 78)
 
     raw_scores, gt_labels = make_proposal_data()

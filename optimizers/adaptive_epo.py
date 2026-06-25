@@ -2,14 +2,14 @@
 optimizers/adaptive_epo.py
 
 Adaptive Emperor Penguin Optimization (EPO) for the MobDEAP
-hyperparameter search task (Section 3.4.3 of the manuscript).
+hyperparameter search task.
 
 EPO tunes three hyperparameters that govern the MobDEAP training
 procedure itself:
 
     lr           -- AdamW learning rate
     dropout      -- dropout rate before the final classification layer
-    da_eva_lambda -- softmax temperature lambda in DA-EVA's Eq. 9
+    da_eva_lambda -- softmax temperature lambda in DA-EVA
 
 These hyperparameters are inaccessible to training-time gradients
 because they control the training procedure rather than participate
@@ -32,8 +32,7 @@ import numpy as np
 
 @dataclass
 class EPOConfig:
-    """All Adaptive EPO hyperparameters, explicit and documented
-    (Reviewer #3 Comment 6 reproducibility requirement)."""
+    """All Adaptive EPO hyperparameters, explicit and documented"""
 
     population_size: int = 30
     max_iterations: int = 100

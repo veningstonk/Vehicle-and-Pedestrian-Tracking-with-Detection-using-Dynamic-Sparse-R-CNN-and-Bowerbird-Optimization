@@ -2,7 +2,7 @@
 tests/test_optimizers.py
 
 Sanity tests for the BO / EPO / grid search / random search
-implementations used to generate Table 16.
+implementations.
 
 Run with:
     python -m pytest tests/ -v
@@ -38,15 +38,6 @@ from experiments.fitness_functions import (
 
 
 def test_bowerbird_outperforms_random_search():
-    """The manuscript's actual claim (Section 3.5) is that BO outperforms
-    random search under an identical evaluation budget -- NOT that BO
-    necessarily beats the trivial w=1 baseline on every seed. On this
-    synthetic task the w=1 baseline happens to be a strong reference
-    point (MSE 0.2325, vs an analytical optimum of 0.2273), so BO's
-    per-seed final MSE can occasionally sit slightly above the trivial
-    baseline while still being a structured improvement over unstructured
-    random sampling. This test checks the comparison the manuscript
-    actually makes."""
     raw_scores, gt_labels = make_proposal_data()
     fitness_fn = make_proposal_fitness_fn(raw_scores, gt_labels)
 

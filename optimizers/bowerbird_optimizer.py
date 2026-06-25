@@ -2,7 +2,7 @@
 optimizers/bowerbird_optimizer.py
 
 Satin Bowerbird Optimizer (BO) for the DSR-CNN proposal score
-re-weighting task (Section 3.3 of the manuscript).
+re-weighting task.
 
 BO optimises a weight vector w in R^100 (one scalar per detection
 proposal) that scales raw confidence scores before non-maximum
@@ -11,7 +11,7 @@ matching step in the pipeline, which is combinatorial and therefore
 non-differentiable -- this is why a population-based metaheuristic
 is used instead of a gradient-based optimiser (SGD / Adam).
 
-Fitness function (manuscript Eq. 3):
+Fitness function:
 
     F(w) = (1/N) * sum_n ( w_n * s_n - g_n )^2
 
@@ -20,14 +20,6 @@ where:
     g_n  = ground-truth presence indicator in {0, 1}
     N    = number of (image, proposal) pairs evaluated
 
-Reference:
-    Samareh Moosavi, S.H. & Khatibi Bardsiri, V. (2017).
-    Satin bowerbird optimizer: A new optimization algorithm to
-    optimize ANFIS for software development effort estimation.
-    Engineering Applications of Artificial Intelligence, 60, 1-15.
-
-    Wangkhamhan, T. (2021). Chaotic logistic map initialisation for
-    improved population diversity in metaheuristic optimisation.
 """
 from __future__ import annotations
 
@@ -39,9 +31,6 @@ import numpy as np
 
 @dataclass
 class BOConfig:
-    """All Bowerbird Optimizer hyperparameters, explicit and documented
-    (Reviewer #3 Comment 6 reproducibility requirement)."""
-
     population_size: int = 30
     max_iterations: int = 100
     alpha: float = 0.5          # attraction weight (exploitation)
