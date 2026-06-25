@@ -27,7 +27,7 @@ experiments/
   run_table16_comparison.py Main script — reproduces Table 16
 
 tests/
-  test_optimizers.py        Sanity checks (reproducibility, monotonicity, etc.)
+  test_optimizers.py        Sanity checks 
 
 results/                    Output directory (created automatically)
   table16_results.json
@@ -112,7 +112,7 @@ why.
 
 ---
 
-## Hyperparameters used (matching manuscript Table 13a / 13b)
+## Hyperparameters used 
 
 | Optimizer | Population | Iterations | Other parameters |
 |---|---|---|---|
